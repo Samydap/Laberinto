@@ -3,17 +3,39 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float fuerza = 5f;
+    public AudioClip sonidoChoque;
+
     Rigidbody rb;
+    AudioSource audioSource;
+    Transform cam;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+        cam = Camera.main.transform;
     }
 
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        rb.AddForce(new Vector3(h, 0, v) * fuerza);
+
+        // "Adelante" y "derecha" según hacia dónde mira la cámara
+        Vector3 adelante = cam.forward;
+        adelante.y = 0;
+        adelante.Normalize();
+
+        Vector3 derecha = cam.right;
+        derecha.y = 0;
+        derecha.Normalize();
+
+        rb.AddForce((adelante * v + derecha * h) * fuerza);
+    }
+
+    void OnCollisionEnter(Collision c)
+    {
+        if (c.gameObject.CompareTag("Pared"))
+            audioSource.PlayOneShot(sonidoChoque);
     }
 }
