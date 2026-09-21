@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float fuerza = 5f;
+    public float speed = 5f;
     public AudioClip sonidoChoque;
 
     Rigidbody rb;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         derecha.y = 0;
         derecha.Normalize();
 
-        rb.AddForce((adelante * v + derecha * h) * fuerza);
+        rb.AddForce((adelante * v + derecha * h) * speed);
     }
 
     void OnCollisionEnter(Collision c)
@@ -39,3 +39,7 @@ public class PlayerController : MonoBehaviour
             audioSource.PlayOneShot(sonidoChoque);
     }
 }
+
+
+
+
