@@ -74,7 +74,7 @@ public class BounceController : MonoBehaviour
 
                 if (amortiguando && !saltoPedido)
                 {
-                    // Cada rebote es más bajo; por debajo del mínimo se queda quieta
+                    
                     fuerzaActual *= factorAmortiguacion;
                     if (fuerzaActual < fuerzaMinima) fuerzaActual = 0f;
                 }
