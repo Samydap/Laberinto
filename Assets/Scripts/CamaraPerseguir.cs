@@ -39,7 +39,7 @@ public class CamaraPerseguir : MonoBehaviour
         float distTotal = dir.magnitude;
         dir /= distTotal;
 
-        // Cuánto puede alejarse la cámara sin chocar con algo
+    
         float distLibre = distTotal;
         if (Physics.SphereCast(pivote, radioCamara, dir, out RaycastHit hit, distTotal,
                                ~0, QueryTriggerInteraction.Ignore))
@@ -48,7 +48,7 @@ public class CamaraPerseguir : MonoBehaviour
                 distLibre = Mathf.Max(hit.distance - margen, distanciaMinima);
         }
 
-        // Si hay pared, se acerca de inmediato; si se libera, vuelve suavemente
+       
         if (distLibre < distanciaActual)
             distanciaActual = distLibre;
         else
