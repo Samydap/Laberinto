@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        // "Adelante" y "derecha" según hacia dónde mira la cámara
+        
         Vector3 adelante = cam.forward;
         adelante.y = 0;
         adelante.Normalize();

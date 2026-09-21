@@ -6,7 +6,11 @@ public class Teletransporte : MonoBehaviour
     public float pausa = 1.5f;
     public float alturaAparicion = 0.4f;
 
-   
+    [Header("Sonido")]
+    public AudioClip sonidoTeletransporte;
+    [Range(0f, 1f)] public float volumen = 1f;
+
+    
     static float tiempoLibre = 0f;
 
     void OnTriggerEnter(Collider other)
@@ -15,6 +19,13 @@ public class Teletransporte : MonoBehaviour
         if (Time.time < tiempoLibre) return;
 
         tiempoLibre = Time.time + pausa;
+
+        
+        if (sonidoTeletransporte != null)
+        {
+            AudioSource.PlayClipAtPoint(sonidoTeletransporte, transform.position, volumen);
+            AudioSource.PlayClipAtPoint(sonidoTeletransporte, destino.position, volumen);
+        }
 
         Vector3 nuevaPos = destino.position + Vector3.up * alturaAparicion;
 

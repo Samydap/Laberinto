@@ -4,6 +4,8 @@ public class TrampaInvisible : MonoBehaviour
 {
     public Transform puntoInicio;
     public bool reiniciarPuntaje = true;
+    public AudioClip sonidoTrampa;
+    [Range(0f, 1f)] public float volumen = 1f;
 
     void OnTriggerEnter(Collider other)
     {
@@ -18,6 +20,10 @@ public class TrampaInvisible : MonoBehaviour
     void Activar(GameObject obj)
     {
         if (!obj.CompareTag("Player")) return;
+
+        
+        if (sonidoTrampa != null)
+            AudioSource.PlayClipAtPoint(sonidoTrampa, Camera.main.transform.position, volumen);
 
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         if (rb != null)
